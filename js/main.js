@@ -3,7 +3,7 @@
 {
   const todos = [];
 
-  function displaytodo(todos) {
+  function displayTodo(todos) {
     const tbody = document.getElementById('tbody');
     const tr = document.createElement('tr');
     const td1 = document.createElement('td');  
@@ -35,7 +35,7 @@
   
     todos.push(todo);
     
-    displaytodo(todos);
+    displayTodo(todos);
 
     });
 
