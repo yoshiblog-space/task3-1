@@ -1,35 +1,61 @@
 'use strict';
 
 {
-   
-  document.getElementById('btn').addEventListener('click',() =>{
-    const tbody=document.querySelector('tbody');
-    const todoComment = document.getElementById('comment');
-    const stateButton= document.createElement('button');
-    stateButton.textContent='作業中';
-    const delButton = document.createElement('button');
-    delButton.textContent ='削除';
-   
-    const todoList =[tbody.rows.length,todoComment.value,stateButton,delButton];
+  const todos = [];
+  const tbody = document.getElementById('tbody');
 
-    const tr =document.createElement('tr');
 
-    for(let i = 0 ; i < todoList.length ; i ++){
+  function displayTodo(todos) {
     
-        const td = document.createElement('td');
-
-        if(i >= todoList.length- 2){
-          td.appendChild(todoList[i]);
-          tr.appendChild(td);
-        }else{
-          td.textContent = todoList[i];
-          tr.appendChild(td);
-        }
-
+    while (tbody.firstChild){
+      tbody.removeChild(tbody.firstChild);
     }
 
+    todos.forEach((todo,i) => {
+      const tr = document.createElement('tr');
+      const td1 = document.createElement('td');  
+      const td2 = document.createElement('td');
+      const td3 = document.createElement('td');
+      const td4 =  document.createElement('td');
+      const stateButton = document.createElement('button');
+      const delButton = document.createElement('button');
+
+      
+      td1.textContent = i;
+      td2.textContent = todo.task;
+      stateButton.textContent = todo.status;
+      delButton.textContent = '削除';
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      td3.appendChild(stateButton);
+      td4.appendChild(delButton);
+      tr.appendChild(td3);
+      tr.appendChild(td4);
       tbody.appendChild(tr);
+
+
     });
+
+
+
+    
+  }
+  
+
+  document.getElementById('btn').addEventListener('click',() => {
+    const todoComment = document.getElementById('comment');
+    const todo = {
+                  task: todoComment.value,
+                  status: '作業中'
+                };
+  
+    todos.push(todo);
+    
+    displayTodo(todos);
+
+    });
+
+
 
 
 }
